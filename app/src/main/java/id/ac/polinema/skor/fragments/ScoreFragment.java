@@ -44,16 +44,23 @@ public class ScoreFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		FragmentScoreBinding binding = DataBindingUtil
-				.inflate(inflater, R.layout.fragment_score, container, false);
+		final FragmentScoreBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_score,  container, false);
 		binding.setHomeGoalScorerList(homeGoalScorerList);
 		binding.setAwayGoalScorerList(awayGoalScorerList);
 		binding.setFragment(this);
+
 		getParentFragmentManager().setFragmentResultListener(HOME_REQUEST_KEY, this, new FragmentResultListener() {
 			@Override
 			public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
 				GoalScorer goalScorer = result.getParcelable(SCORER_KEY);
 				homeGoalScorerList.add(goalScorer);
+
+				StringBuilder iki = new StringBuilder();
+				for (int i=0; i<homeGoalScorerList.size(); i++){
+					iki.append(homeGoalScorerList.get(i).toString());
+				}
+
+				binding.textHomeScorer.setText(iki);
 			}
 		});
 
@@ -62,8 +69,16 @@ public class ScoreFragment extends Fragment {
 			public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
 				GoalScorer goalScorer = result.getParcelable(SCORER_KEY);
 				awayGoalScorerList.add(goalScorer);
+
+				StringBuilder iki = new StringBuilder();
+				for (int i=0; i<awayGoalScorerList.size(); i++){
+					iki.append(awayGoalScorerList.get(i).toString());
+				}
+
+				binding.textAwayScorer.setText(iki);
 			}
 		});
+
 		return binding.getRoot();
 	}
 
