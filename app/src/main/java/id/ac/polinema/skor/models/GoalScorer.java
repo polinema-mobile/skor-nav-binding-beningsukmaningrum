@@ -62,6 +62,9 @@ public class GoalScorer implements Parcelable {
 
 	@Override
 	public String toString() {
-		return name + " " + minute + "\" ";
+		return "GoalScorer{" +
+				"name='" + name + '\'' +
+				", minute=" + minute +
+				'}';
 	}
 }
