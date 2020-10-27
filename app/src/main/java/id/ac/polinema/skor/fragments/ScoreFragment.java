@@ -40,28 +40,6 @@ public class ScoreFragment extends Fragment {
 		this.homeGoalScorerList = new ArrayList<>();
 		this.awayGoalScorerList = new ArrayList<>();
 	}
-	public String getHomeScorer(){
-		StringBuilder result = new StringBuilder();
-		for (GoalScorer g : homeGoalScorerList){
-			result.append(g.getName())
-					.append(" ")
-					.append(g.getMinute())
-					.append("\"  ");
-		}
-		return  result.toString();
-	}
-
-	public String getAwayScorer() {
-		StringBuilder result = new StringBuilder();
-		for (GoalScorer g : awayGoalScorerList) {
-			result.append(g.getName())
-					.append(" ")
-					.append(g.getMinute())
-					.append("\"  ");
-		}
-		return result.toString();
-	}
-
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,6 +55,12 @@ public class ScoreFragment extends Fragment {
 				GoalScorer goalScorer = result.getParcelable(SCORER_KEY);
 				homeGoalScorerList.add(goalScorer);
 
+				StringBuilder iki = new StringBuilder();
+				for (int i=0; i<homeGoalScorerList.size(); i++){
+					iki.append(homeGoalScorerList.get(i).toString());
+				}
+
+				binding.textHomeScorer.setText(iki);
 			}
 		});
 
@@ -86,6 +70,12 @@ public class ScoreFragment extends Fragment {
 				GoalScorer goalScorer = result.getParcelable(SCORER_KEY);
 				awayGoalScorerList.add(goalScorer);
 
+				StringBuilder iki = new StringBuilder();
+				for (int i=0; i<awayGoalScorerList.size(); i++){
+					iki.append(awayGoalScorerList.get(i).toString());
+				}
+
+				binding.textAwayScorer.setText(iki);
 			}
 		});
 
